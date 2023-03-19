@@ -4,6 +4,8 @@ import pandas as pd
 from pandas import DataFrame
 import matplotlib.pyplot as plt
 
+from src.plotting import plot_data
+
 def import_data() -> Tuple[DataFrame, List[str]]:
     cols = ["fLength", "fWidth", "fSize", "fConc", "fConc1", "fAsym", "fM3Long", "fM3Trans", "fAlpha", "fDist", "class"]
     df = pd.read_csv("src/data/magic04.data", names=cols)
@@ -12,19 +14,6 @@ def import_data() -> Tuple[DataFrame, List[str]]:
 def format_class_to_int(df: DataFrame) -> DataFrame:
     df["class"] = df["class"].map({"g": 0, "h": 1})
     return df
-
-def plot_data(df: DataFrame, cols: List[str]) -> None:
-    for label in cols[:-1]:
-        plt.hist(df[df["class"]==1][label], color='blue', label="gamma", alpha=0.7, density=True)
-        plt.hist(df[df["class"]==0][label], color='red', label="hadron", alpha=0.7, density=True)
-        plt.title(label)
-        plt.ylabel("Probability")
-        plt.xlabel(label)
-        plt.legend()
-        plt.savefig(f"src/plots/{label}.png")
-        plt.close()
-        
-        
         
 
 def main():
