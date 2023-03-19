@@ -44,3 +44,9 @@ AKA column headers
     - euclidian distance formula: distance = √((x1 - x2)^2 + (y1 - y2)^2)
         - the distance function can be extended beyond 2 dimensions depending on the number of features
 - the K is simply how many of the closest neighbors to consider
+
+## Naive Bayes
+- bayes' rule = the probability that a happened given b happened
+    - notation: p(A|B) = p(B|A) * p(A) / p(B)
+- naive bayes expands bayes' rule and applies it to classification
+- the naive part comes from the assumption that all the features are independant 
