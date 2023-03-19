@@ -3,7 +3,12 @@ import numpy as np
 import pandas as pd
 from pandas import DataFrame
 from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import classification_report
 from imblearn.over_sampling import RandomOverSampler
+
+# models
+from models.knn import run_knn
 
 def import_data() -> DataFrame:
     cols = ["fLength", "fWidth", "fSize", "fConc", "fConc1", "fAsym", "fM3Long", "fM3Trans", "fAlpha", "fDist", "class"]
@@ -43,13 +48,11 @@ def main():
     # split data
     [df_train, df_valid, df_test] = split_data(df_numeric_data)
     # scale data / preprocess data
-    [df_train, X_train, y_train] = scale_data(df_train, oversample=True)
-    [df_valid, X_valid, y_valid] = scale_data(df_valid)
-    [df_test, X_test, y_test] = scale_data(df_test)
+    [df_train, df_X_train, df_y_train] = scale_data(df_train, oversample=True)
+    [df_valid, df_X_valid, df_y_valid] = scale_data(df_valid)
+    [df_test, df_X_test, df_y_test] = scale_data(df_test)
     
-    print(len(y_train))
-    print(sum(y_train == 1))
-    print(sum(y_train == 0))
+    run_knn(df_X_train, df_y_train, df_X_test, df_y_test)
 
 
 if __name__ == "__main__":
