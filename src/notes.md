@@ -29,3 +29,18 @@ AKA column headers
 ## Regression
 - used to predict continuous values (a number on some sort of scale)
 - ex: stock market, housing prices
+
+## Data Prep
+
+### Oversampling
+- means to generate more of an underrepresended class of the data
+    - ex: if there are 100 instances of the X class and 200 of the Y class then the oversampler will generate more data for X
+
+
+## K-Nearest Neighbors
+- the concept is: given a set of labeled data points, you can plot a new data point and try to guess it's label using the labels of surrounding (neighbor) data points
+- we use a distance function (ex: eudlidean distance) 
+    - euclidean distance is basically drawing a straight line from one plot point to another
+    - euclidian distance formula: distance = √((x1 - x2)^2 + (y1 - y2)^2)
+        - the distance function can be extended beyond 2 dimensions depending on the number of features
+- the K is simply how many of the closest neighbors to consider
