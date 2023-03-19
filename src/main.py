@@ -3,12 +3,12 @@ import numpy as np
 import pandas as pd
 from pandas import DataFrame
 from sklearn.preprocessing import StandardScaler
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report
 from imblearn.over_sampling import RandomOverSampler
 
 # models
-from models.knn import run_knn
+from models.knn import knn
+from models.naive_bayes import naive_bayes
 
 def import_data() -> DataFrame:
     cols = ["fLength", "fWidth", "fSize", "fConc", "fConc1", "fAsym", "fM3Long", "fM3Trans", "fAlpha", "fDist", "class"]
@@ -52,7 +52,9 @@ def main():
     [df_valid, df_X_valid, df_y_valid] = scale_data(df_valid)
     [df_test, df_X_test, df_y_test] = scale_data(df_test)
     
-    run_knn(df_X_train, df_y_train, df_X_test, df_y_test)
+    df_y_pred = naive_bayes(df_X_train, df_y_train, df_X_test)
+    print(classification_report(df_y_test, df_y_pred))
+    
 
 
 if __name__ == "__main__":
