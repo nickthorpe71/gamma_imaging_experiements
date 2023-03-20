@@ -9,6 +9,7 @@ from imblearn.over_sampling import RandomOverSampler
 # models
 from models.knn import knn
 from models.naive_bayes import naive_bayes
+from models.svm import run_svm
 
 def import_data() -> DataFrame:
     cols = ["fLength", "fWidth", "fSize", "fConc", "fConc1", "fAsym", "fM3Long", "fM3Trans", "fAlpha", "fDist", "class"]
@@ -17,6 +18,7 @@ def import_data() -> DataFrame:
 
 def format_class_to_int(df: DataFrame) -> DataFrame:
     df["class"] = (df["class"] == "g").astype(int) # convert class to int: g = 1, h = 0
+    # df["class"] = df["class"].apply(lambda x: 1 if x == 1 else -1) # convert class to int: g = 1, h = -1
     return df
 
 def split_data(df: DataFrame) -> Tuple[DataFrame, DataFrame, DataFrame]:
@@ -52,9 +54,7 @@ def main():
     [df_valid, df_X_valid, df_y_valid] = scale_data(df_valid)
     [df_test, df_X_test, df_y_test] = scale_data(df_test)
     
-    df_y_pred = naive_bayes(df_X_train, df_y_train, df_X_test)
-    print(classification_report(df_y_test, df_y_pred))
-    
+    run_svm(df_X_train, df_y_train, df_X_test, df_y_test)
 
 
 if __name__ == "__main__":
